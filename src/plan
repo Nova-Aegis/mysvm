@@ -1,0 +1,5 @@
+varray.c - s'occupe des liste de taille variable
+prims.c - s'occupe des primitive
+exec.c - s'occupe de lire l'instruction et modifie l'état de la m'émoire
+status.c - s'occupe de la mémoire du programme
+main.c - regourpe le tout
