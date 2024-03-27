@@ -1,5 +1,4 @@
-obj/*.o
+**.o
 **~
-tests/*.bc
 tests/*.asm
 tests/*.txt
