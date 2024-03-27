@@ -1,0 +1,36 @@
+===========================================
+    mysvm : mini-scheme virtual machine
+===========================================
+
+Version :
+    0.1
+
+Author :
+    - Guillaume Regnault
+
+
+Synopsis :
+
+mysvm is an attempt to create a virtual machine for mini-scheme. It is purely for experimental purposes and should not be used as the official svm.
+mysvm has a mini-scheme compiler included. This compiler was not developped by the author and is just there to test mysvm. Read the compiler's Licence before continuing. The source files are not included for the compiler.
+
+
+Information :
+
+You can test mysvm with your own mini-scheme. Note, not all operations are included in mini-scheme.
+
+
+Note :
+mysvm can handle multiple operations such as :
+- additions (+)
+- subtractions (-)
+- multiplications (*)
+- pairs / list (cons / list)
+- equality (eq?)
+- zero testing (zero?)
+
+This version of mysvm currently does not hanlde :
+- divisions (/)
+- pair testint (pair?)
+
+
