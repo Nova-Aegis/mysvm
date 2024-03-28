@@ -295,7 +295,7 @@ int create_varray(varray_t**result){
 }
 
 
-void varray_free(varray_t*array) {
+void free_varray(varray_t*array) {
 	// fprintf(stdout, "array size %d\n", array->size);
 	for (int i = 0; i < array->size; i++) {
 		if (array->data[i].type == -1) break;
@@ -304,7 +304,7 @@ void varray_free(varray_t*array) {
 	free(array->data);
 	free(array);
 }
-void varray_code_free(varray_code_t*array) {
+void free_varray_code(varray_code_t*array) {
 	free(array->code);
 	free(array);
 }

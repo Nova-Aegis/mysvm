@@ -100,8 +100,8 @@ int pop(varray_t*array, intptr_t*type, intptr_t*data);
 int create_varray(varray_t**result);
 
 
-void varray_free(varray_t*array);
-void varray_code_free(varray_code_t*array);
+void free_varray(varray_t*array);
+void free_varray_code(varray_code_t*array);
 
 
 /** DEBUG **/

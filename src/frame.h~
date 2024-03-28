@@ -1,0 +1,33 @@
+#include "varray.h"
+#include "pair.h"
+#include <stdint.h>
+
+
+typedef struct frame_s {
+	intptr_t pc;
+	varray_t*localEnv;
+	varray_t*stack;
+} frame_t;
+
+
+typedef struct varray_frame_s {
+	frame_t*frames;
+	int size;
+} varray_frame_t;
+
+int create_varray_frame(varray_frame_t**result) {
+	varray_frame_t*new = (varray_frame_t*) malloc(sizeof(varray_frame_t));
+	if (!new) {
+		fprintf(stderr, "error [create_varray_frame] malloc error varray_frame_t\n");
+		return 1;
+	}
+	new->frames = (frame_t*) malloc(sizeof(frame_t) * INITIAL_SIZE);
+	if (!new->frames) {
+		fprintf(stderr, "error [create_varray_frame] malloc error frame_t\n");
+		free(new);
+		return 1;
+	}
+	new->size = INITIAL_SIZE;
+	*result = new;
+	return 0;
+}

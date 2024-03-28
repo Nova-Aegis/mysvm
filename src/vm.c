@@ -14,6 +14,10 @@
 #include "pair.h"
 #define __PAIR_H_
 #endif
+#ifndef __FRAME_H__
+#include "frame.h"
+#define __FRAME_H_
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,12 +51,8 @@ void vm_start(const char*outputFile, const char*codeFile, int debug) {
 	varray_t*globalEnv = NULL;
 	varray_t*localEnv = NULL;
 	varray_t*stack = NULL;
+	varray_frame_t*execution_frame= NULL;
 	int level = 0;
- 	intptr_t fun_return[128];
-	intptr_t fun_argc[128];
-	intptr_t lambda_passed_argc[128];
-	intptr_t lambda_passed_level = 0;
-	int lambda_passed;
 	intptr_t currentByte;
 	intptr_t type = -1;
 	intptr_t data = -1;
@@ -85,7 +85,11 @@ void vm_start(const char*outputFile, const char*codeFile, int debug) {
 	if (create_varray(&stack)) {
 		goto exit;
 	}
-	
+	// create execution_frame
+	if (create_varray_frame(&execution_frame)) {
+		goto exit;
+	}
+	varray_frame_add(execution_frame, 0);
 	// execute bytecode
 	if (next_code(tabCode,&currentByte)) goto exit;
 	while (currentByte != -1) {
@@ -401,25 +405,30 @@ void vm_start(const char*outputFile, const char*codeFile, int debug) {
 		if (debug) fprintf(stdout, "closed output\n");
 	}
 	
-	//free code
+	// free code
 	if (tabCode) {
-		varray_code_free(tabCode);
+		free_varray_code(tabCode);
 		if (debug) fprintf(stdout, "free tabCode\n");
 	}
-	//free global env
+	// free global env
 	if (globalEnv) {
-		varray_free(globalEnv);
+		free_varray(globalEnv);
 		if (debug) fprintf(stdout, "free globalEnv\n");
 	}
-	//free global env
+	// free global env
 	if (localEnv) {
-		varray_free(localEnv);
+		free_varray(localEnv);
 		if (debug) fprintf(stdout, "free localEnv\n");
 	}
-	//free stack
+	// free stack
 	if (stack) {
-		varray_free(stack);
+		free_varray(stack);
 		if (debug) fprintf(stdout, "free stack\n");
+	}
+	// free exectuion_frame
+	if (execution_frame) {
+		free_varray_frame(execution_frame);
+		if (debug) fprintf(stdout, "free execution_frame\n");
 	}
 	return;
 }

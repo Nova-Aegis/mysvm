@@ -237,8 +237,8 @@ int zerop(intptr_t params, varray_t*stack) {
 	}
 	intptr_t type, data;
 	if (pop(stack, &type, &data)) return 1;
-	if (type != 1) {
-		fprintf(stderr, "error [prim zerop] wrong argument type, expected INT given %s\n", TYPES[type]);
+	if (type != 1 && type != 5) { 
+		fprintf(stderr, "error [prim zerop] wrong argument type, expected INT or PAIR given %s\n", TYPES[type]);
 		return 1;
 	}
 	fprintf(stdout, "{zero?[%"PRIdPTR"][%"PRIdPTR"]", type, data);

@@ -1,0 +1,30 @@
+#include "frame.h"
+#include "pair.h"
+#include "varray.h"
+
+/**
+ * create varray_frame_t with INITIAL_SIZE
+ * return 0 on success
+ **/
+int create_varray_frame(varray_frame_t**result) {
+	// create varray for frame
+	varray_frame_t*new = (varray_frame_t*) malloc(sizeof(varray_frame_t));
+	if (!new) {
+		fprintf(stderr, "error [create_varray_frame] malloc error varray_frame_t\n");
+		return 1;
+	}
+	//create starting array of frame
+	new->frames = (frame_t*) malloc(sizeof(frame_t) * INITIAL_SIZE);
+	if (!new->frames) {
+		fprintf(stderr, "error [create_varray_frame] malloc error frame_t\n");
+		free(new);
+		return 1;
+	}
+	// initialise values
+	new->size = INITIAL_SIZE;
+	// return value
+	*result = new;
+	return 0;
+}
+
+int 
